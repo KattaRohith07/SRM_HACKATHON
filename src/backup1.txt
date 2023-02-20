@@ -1,0 +1,288 @@
+import React, { useState } from 'react';
+import { Document, Page, Text, View, StyleSheet, Image, pdf } from '@react-pdf/renderer';
+import {FormControl,  InputLabel, Select, MenuItem, Button, Input}from '@mui/material/';
+import { Container } from '@mui/system';
+import TextField from '@mui/material/TextField';
+import rs20 from './assets/rs20.png';
+
+const styles = StyleSheet.create({
+  page: {
+    backgroundColor: 'white',
+    padding: 20,
+    fontFamily: 'Helvetica',
+  },
+  section: {
+    // margin: 10,
+    padding: 30,
+    flexGrow: 1,
+  },
+  heading: {
+    textDecoration: 'underline',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 25,
+    textAlign: "center",
+  },
+  subheading: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  text: {
+    fontSize: 12,
+    marginBottom: 10,
+    lineHeight: 2,
+    letterSpacing: 0.6,
+  },
+  image: {
+    width: '100%',
+    // width: 200,
+    // height: 100,
+    marginBottom: 140,
+  },
+});
+
+const MyDocument = ({ formValues }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <Image style={styles.image} src={rs20} />
+      <View style={styles.section}>
+        <Text style={styles.heading}>RESIDENTIAL RENTAL AGREEMENT</Text>
+        {/* <Text style={styles.subheading}>Details</Text> */}
+        {/* <Text style={styles.text}>Name: {formValues.name}</Text>
+        <Text style={styles.text}>Email: {formValues.email}</Text>
+        <Text style={styles.text}>Address: {formValues.address}</Text> */}
+        <Text style={styles.text}>
+            This agreement made at {formValues.city},{formValues.state} on this {formValues.date} between {formValues.name1}, residing at {formValues.address1} hereinafter referred to as `LESSOR` of One Part AND {formValues.name2} residing at {formValues.address2} hereinafter referred to as the `LESSEE` of the other Part;
+        </Text>
+        <Text style={styles.text}>
+            WHEREAS the Lessor is the lawful owner of, and otherwise well sufficiently entitled to {formValues.address3} falling in the category, {formValues.type} and comprising of {formValues.bed} Bedrooms, {formValues.bath} Bathrooms, {formValues.car} Carparks with an extent of {formValues.sqft} Square Feet hereinafter referred to as the `said premises`;
+        </Text>
+      </View>
+    </Page>
+  </Document>
+);
+
+const Rent = () => {
+  const [formValues, setFormValues] = useState({
+    city: '',
+    state: '',
+    date: '',
+    name1: '',
+    address1: '',
+    name2: '',
+    address2: '',
+    address3: '',
+    type: '',
+    bed: '',
+    bath: '',
+    car: '',
+    sqft: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    event.target.value = value;
+    console.log(value);
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    generatePdf();
+  };
+
+  const generatePdf = () => {
+    const doc = <MyDocument formValues={formValues} />;
+    const asPdf = pdf(doc).toBlob();
+    asPdf.then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      handleOpen(url);
+    });
+  };
+
+  const handleOpen = (url) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) {
+      newWindow.opener = null;
+    }
+  };
+
+  return (
+    <div>
+        <Container>
+      <form onSubmit={handleSubmit}>
+      <FormControl fullWidth>
+          <Input
+        id="city"
+        label="City"
+        type="text"
+        value={formValues.city}
+        onChange={handleChange}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+          <br/><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="state"
+        label="State"
+        type="text"
+        onChange={handleChange}
+        value={formValues.state}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+          <TextField
+        id="date"
+        label="Agreement Date"
+        type="date"
+        onChange={handleChange}
+        // sx={{ width: 220 }}
+        value={formValues.date}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+        </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="name1"
+        label="Landlord Name"
+        type="text"
+        onChange={handleChange}
+        value={formValues.name1}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="address1"
+        label="Landlord Address"
+        type="text"
+        onChange={handleChange}
+        value={formValues.address1}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="name2"
+        label="Tenant Name"
+        type="text"
+        onChange={handleChange}
+        value={formValues.name2}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="address2"
+        label="Tenant Address"
+        type="text"
+        onChange={handleChange}
+        value={formValues.address2}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="address3"
+        label="Land Address"
+        type="text"
+        onChange={handleChange}
+        value={formValues.address3}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Type of Property</InputLabel>
+          <Select 
+          labelId="demo-simple-select-label"
+          id="type"
+          label="Type of Property"
+          // sx={{ width: 220 }}
+          name="type" 
+          value={formValues.type}
+          onChange={handleChange}>
+
+            <MenuItem value={"value1"}>value1</MenuItem>
+            <MenuItem value={"value2"}>value2</MenuItem>
+            <MenuItem value={"value3"}>value3</MenuItem>
+            <MenuItem value={"value4"}>value4</MenuItem>
+          </Select>
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="bed"
+        label="No. of Bedroom"
+        type="number"
+        value={formValues.bed}
+        onChange={handleChange}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="bath"
+        label="No. of Bathroom"
+        type="number"
+        value={formValues.bath}
+        onChange={handleChange}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="car"
+        label="No. of Car parking area"
+        type="number"
+        value={formValues.car}
+        onChange={handleChange}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <FormControl fullWidth>
+        <TextField
+        id="sqft"
+        label="Sqft"
+        type="number"
+        value={formValues.sqft}
+        onChange={handleChange}
+        // sx={{ width: 220 }}
+      />
+          </FormControl>
+        <br /><br/>
+
+        <Button type="submit" variant="contained">Generate PDF</Button>
+      </form>
+        </Container>
+    </div>
+  );
+};
+
+export default Rent;
