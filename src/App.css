@@ -69,9 +69,12 @@
 }
 
 .Upload {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+    text-align: center !important;
+    position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .upForm {
@@ -79,17 +82,20 @@
 }
 
 .container {
-  width: 70%;
+  width: 50%;
   text-align: left;
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #f2f2f2e7;
   padding: 20px;
 }
 
 .parent {
+  background-image: url('https://img.freepik.com/free-photo/rental-contract-assets-concept_53876-127990.jpg?w=1060&t=st=1676959177~exp=1676959777~hmac=0def15a6e6118aa731745cda10c863da9593eb1b2de8728df73268ddf60cd842');
   display: flex;
   justify-content: center;
- 
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
 }
 
 .upParent {
@@ -97,6 +103,12 @@
   align-items: center;
   flex-direction: column;
   background-color: #45a049;
+  background-image: url('https://img.freepik.com/free-photo/apply-voucher-code-starting-download_53876-134031.jpg?w=1380&t=st=1676960224~exp=1676960824~hmac=c5536374354bc75aa9eb64663e636e69c09fcc3fadb4221a1ff75fee1135d5a1');
+  width: 100vw;
+  height: 100vh;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');

@@ -111,7 +111,7 @@ const Rent = () => {
   return (
     <div class="parent">
     <div class="container">
-      <h1>Fill in the details</h1>
+      <h1>Rental Contract</h1>
       <form onSubmit={handleSubmit}>
         <label>
           City:

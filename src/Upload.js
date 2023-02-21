@@ -20,8 +20,8 @@ function Upload() {
   
     return (
       <div className="upParent">
-        <div><h1>Upload the file</h1></div>
       <div className="Upload container">
+      <h1>Upload the file</h1>
       <form onSubmit={handleUpload} className="upForm">
         <label  className = "Upselectbtn" htmlFor="pdf_file">Select a PDF file:</label>
         <input type="file" name="pdf_file" id="pdf_file" onChange={handleFileChange} accept=".pdf" />
