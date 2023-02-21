@@ -104,7 +104,9 @@ const Rent = () => {
   };
 
   return (
+    <div class="parent">
     <div class="container">
+      <h1>Fill in the details</h1>
       <form onSubmit={handleSubmit}>
         <label>
           City:
@@ -189,8 +191,9 @@ const Rent = () => {
         </label>
         <br />
 
-        <button type="submit">Generate PDF</button>
+        <button type="submit" class="submitBtn">Generate PDF</button>
       </form>
+    </div>
     </div>
   );
 };
