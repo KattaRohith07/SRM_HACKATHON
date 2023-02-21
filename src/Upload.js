@@ -19,12 +19,16 @@ function Upload() {
   
   
     return (
-      <div className="App">
-      <form onSubmit={handleUpload}>
-        <label  classname = "selectbtn" htmlFor="pdf_file">Select a PDF file:</label>
+      <div className="upParent">
+        <div><h1>Upload the file</h1></div>
+      <div className="Upload container">
+      <form onSubmit={handleUpload} className="upForm">
+        <label  className = "Upselectbtn" htmlFor="pdf_file">Select a PDF file:</label>
         <input type="file" name="pdf_file" id="pdf_file" onChange={handleFileChange} accept=".pdf" />
-        <button  classname="uploadbtn" type="submit">Upload</button>
+        <button  className="uploadbtn" type="submit">Upload</button>
+
       </form>
+      </div>
       </div>
     );
   }

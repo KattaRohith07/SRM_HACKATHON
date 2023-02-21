@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Document, Page, Text, View, StyleSheet, Image, pdf } from '@react-pdf/renderer';
-import rs20 from './assets/rs20.png';
+import rs10 from './assets/rs10.png';
 
 const styles = StyleSheet.create({
   page: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 const MyDocument = ({ formValues }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <Image style={styles.image} src={rs20} />
+      <Image style={styles.image} src={rs10} />
       <View style={styles.section}>
         <Text style={styles.heading}>RESIDENTIAL RENTAL AGREEMENT</Text>
         {/* <Text style={styles.subheading}>Details</Text> */}
@@ -60,7 +60,7 @@ const MyDocument = ({ formValues }) => (
   </Document>
 );
 
-const Rent = () => {
+const Joint = () => {
   const [formValues, setFormValues] = useState({
     city: '',
     state: '',
@@ -203,4 +203,4 @@ const Rent = () => {
   );
 };
 
-export default Rent;
+export default Joint;
